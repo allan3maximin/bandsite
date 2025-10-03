@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Website</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <img src="assets/logo.png" alt="Logo" class="logo">
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-toggle-label">
+        <span></span>
+        <span></span>
+    </label>
+    <nav>
+      <a href="#section1">Music Video</a>
+      <a href="#section2">About</a>
+      <a href="#section3">Live</a>
+      <a href="#section4">Discography</a>
+    </nav>
+  </header>
+
+  <section class="main-visual">
+    <img src="assets/logo_main.png" alt="Main Logo" class="logo-main">
+  </section>
+    
+  <section class="section dark-section" id="section1">
+    <div class="content-wrapper">
+      <h2>Music Video</h2> <div class="video-content">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+</section>
+
+  <section class="section dark-section" id="section2">
+    <div class="content-wrapper about-content">
+      <h2>About</h2>
+      <div class="about-text">
+        <p>GLAYは1990年代から活動する日本のロックバンド。</p>
+        <p>感情豊かなメロディと圧倒的なライブパフォーマンスで、</p>
+        <p>幅広い世代に支持されています。最新アルバム『Beloved』では、</p>
+        <p>エレクトロとロックを融合した新しいサウンドに挑戦しています。</p>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section" id="section3">
+    <div class="content-wrapper live-content">
+      <h2>Live</h2>
+      <div class="live-wrapper">
+        <ul>
+          <li><span class="live-date">2025/03/15</span><span class="live-venue">東京ドーム</span></li>
+          <li><span class="live-date">2025/04/02</span><span class="live-venue">大阪城ホール</span></li>
+          <li><span class="live-date">2025/05/20</span><span class="live-venue">札幌ドーム</span></li>
+          <li><span class="live-date">2025/06/10</span><span class="live-venue">福岡ヤフオク!ドーム</span></li>
+        </ul>
+      </div>
+  </div>
+  </section>
+
+  <section class="section" id="section4">
+    <div class="content-wrapper discography-content">
+      <h2>Discography</h2>
+      <div class="disc-container">
+        <div class="disc-item">
+          <img src="assets/disc1.jpg" alt="Disc 1">
+          <a href="#" class="btn-link">Play Now</a>
+        </div>
+        <div class="disc-item">
+          <img src="assets/disc2.jpg" alt="Disc 2">
+          <a href="#" class="btn-link">Play Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <script src="script.js"></script>
+</body>
+</html>
