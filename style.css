@@ -15,7 +15,7 @@ body {
   position: fixed;
   top:0; left:0; width:100%;
   height:70px;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0,0,0,0.90);
   display:flex; align-items:center; justify-content:space-between;
   padding:0 2rem;
   z-index:100;
@@ -78,6 +78,7 @@ body {
   position: relative;
   height: 100vh;
   width: 100%;
+  /* PC用の画像（デフォルト） */
   background: url("assets/main_visual.jpg") center top/cover no-repeat;
   display:flex; align-items:center; justify-content:center;
   overflow:hidden;
@@ -100,7 +101,7 @@ body {
 }
 @keyframes zoomIn {
   0% {transform:scale(1.3); opacity:0;}
-  100% {transform:scale(1); opacity:1;}
+  100% {transform:scale(0.7); opacity: 1;}
 }
 
 /* Section 共通スタイル */
@@ -271,6 +272,13 @@ body {
 
 /* スマホ (768px以下) */
 @media(max-width:768px){
+  
+  /* メインビジュアルの背景画像をスマホ用に切り替える */
+  .main-visual {
+      /* assets/main_visual_sp.jpg は、用意したスマホ用画像ファイル名に置き換えてください */
+      background-image: url("assets/main_visual_sp.jpg"); 
+  }
+  
   /* content-wrapperのスマホ調整 */
   .content-wrapper {
       padding: 1rem;
@@ -371,7 +379,7 @@ body {
       display: flex; 
       flex-direction: column; 
       
-      background: rgba(0, 0, 0, 0.95);
+      background: rgba(0, 0, 0, 0.90);
       
       /* 縦並びの項目を右寄せにする */
       justify-content: center;
