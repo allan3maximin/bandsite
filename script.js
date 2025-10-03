@@ -1,17 +1,3 @@
-document.addEventListener("scroll", () => {
-  const header = document.querySelector(".site-header");
-  if(window.scrollY > 50) {
-    header.classList.add("scrolled");
-  } else {
-    header.classList.remove("scrolled");
-  }
-  document.querySelectorAll(".section").forEach(sec => {
-    const rect = sec.getBoundingClientRect();
-    if(rect.top < window.innerHeight * 0.8 && rect.bottom > 0) {
-      sec.classList.add("active");
-    }
-  });
-});
 
 document.addEventListener('DOMContentLoaded', () => {
   // ハンバーガーメニューのチェックボックス要素を取得
