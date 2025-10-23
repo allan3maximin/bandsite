@@ -720,7 +720,7 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   .disc-item {
     max-width:50%;
     width: 50%;
-    padding: 0.6rem;
+    padding: 0.5rem;
     align-items: center;
     text-align: center;
     margin: 0 auto;
