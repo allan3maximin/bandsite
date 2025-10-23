@@ -200,6 +200,7 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
 .section {
   /* desktop default: use full viewport height so each section feels like a page */
   height: 100vh;
+  min-height: 100vh;
   scroll-snap-align: start;
   scroll-snap-stop: always;
   display:flex;
@@ -692,7 +693,7 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   .section {
     /* keep sections full-height on small screens as well, but allow internal scrolling */
     height: 100vh;
-    min-height: 0;
+    min-height: 100vh;
     padding: 1rem 1rem;
   }
 
