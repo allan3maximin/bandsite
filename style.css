@@ -181,17 +181,15 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   100% { background-position: center 18%; }
 }
 .main-visual { animation: bgFloat 28s ease-in-out infinite; }
-
-.main-visual .logo-main {
-  position: relative;
-  z-index:2;
-  max-width:420px;
-  width:75%;
-  animation: logoPop 1.6s cubic-bezier(.2,.9,.3,1) forwards;
-  opacity:0;
-  transform: translateY(18%);
-  filter: drop-shadow(0 18px 40px rgba(0,0,0,0.6));
+/* Two patterns: desktop/tablet (>=768px) and mobile (<768px) */
+@media (max-width: 767px) {
+  /* keep scroll snap off on small screens */
+  body { scroll-snap-type: none; }
+  .live-embed iframe { height: 320px; }
+  /* Move avatar rule into mobile block */
+  .tw-avatar { width: 56px; height: 56px; }
 }
+
 @keyframes logoPop {
   0% { transform: translateY(18%) scale(1.06); opacity:0; }
   60% { transform: translateY(-4%) scale(0.98); opacity:1; }
@@ -200,15 +198,16 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
 
 /* Section 共通スタイル */
 .section {
-  height:100vh;
-  scroll-snap-align: start; 
+  /* desktop default: use full viewport height so each section feels like a page */
+  height: 100vh;
+  scroll-snap-align: start;
   scroll-snap-stop: always;
   display:flex;
-  align-items:center;
+  align-items:center; /* center main content vertically by default */
   justify-content:center;
   padding:2rem;
   position:relative;
-  overflow:hidden;
+  overflow: hidden; /* content-wrapper will handle internal scrolling if needed */
 }
 
 /* 背景色が黒のセクション (section1, section2用) */
@@ -225,10 +224,11 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   text-align:left;
   transform: none;
   transition: none;
-  min-height: calc(100vh - 140px); /* account for header padding */
+  /* default: let content size naturally; for desktop we'll cap height with a media query */
+  min-height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   color: inherit;
   background: none;
@@ -236,6 +236,66 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   box-shadow: none;
   border: none;
   backdrop-filter: none;
+}
+
+/* Desktop: keep sections 100vh but make inner wrapper scrollable so tall content fits */
+@media (min-width: 768px) {
+  .content-wrapper {
+    max-height: calc(100vh - 140px); /* account for header + spacing */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 1rem; /* space for scrollbar */
+  }
+  /* ensure disc items don't exceed wrapper width */
+  .disc-item { max-width: 720px; width: 100%; }
+  /* Desktop: discography 2-column */
+  .disc-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .disc-item {
+    flex: 0 0 45%;
+    max-width: 480px;
+    width: 45%;
+  }
+  /* Ensure discography area centers its cards vertically within the section on desktop */
+  .discography-content {
+    min-height: calc(100vh - 140px);
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* Desktop override: make each disc-item roughly half the previous size
+   (user requested "ディスコ item のサイズを半分にする"). This only applies
+   for >=768px so mobile stays unchanged. */
+@media (min-width: 768px) {
+  .disc-item {
+    /* previously 45% / max-width ~480px; reduce to ~22% / 240px */
+    flex: 0 0 22%;
+    width: 22%;
+    max-width: 240px;
+  }
+
+  /* reduce album art height so smaller cards keep good proportions */
+  .disc-item img {
+    max-height: 150px;
+  }
+
+  /* tighten gaps to accommodate more items per row */
+  .disc-container {
+    gap: 1rem;
+    justify-content: flex-start;
+  }
+
+  /* keep discography centered but allow items to flow naturally */
+  .discography-content {
+    align-items: flex-start;
+  }
 }
 .content-wrapper h2 {
   font-size:2rem;
@@ -291,12 +351,12 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   .live-embed iframe { height: 320px; }
 }
 
-/* Twitter / X member cards */
 .tw-cards {
-  display:flex;
-  flex-direction:column;
-  gap:0.9rem;
-  margin-top:1.2rem;
+  /* Desktop/Tablet: two-column grid. Mobile override below. */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-top: 1.2rem;
 }
 .tw-card {
   display:flex;
@@ -325,8 +385,15 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
 .tw-name { font-weight:700; color: #f7fbff; }
 .tw-id { font-size:0.95rem; color: var(--muted); }
 
-@media(max-width:600px){
-  .tw-avatar { width:56px; height:56px; }
+/* avatar sizing for mobile (moved into mobile block) */
+
+/* Mobile: Twitter should be single column */
+@media (max-width:768px) {
+  .tw-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
 }
 
 
@@ -380,25 +447,29 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
 
 .disc-container {
   display:flex;
-  flex-direction: row; 
-  justify-content:center;
-  gap:1.5rem;
-  overflow-x: hidden; 
+  flex-direction: column; /* vertical stacking */
+  justify-content: center;
+  align-items: center;
+  gap:1rem;
+  overflow-x: hidden;
   padding-bottom:1rem;
-  scroll-snap-type: none;
+  width: 100%;
 }
 .disc-item {
-  flex: 0 0 40%;
-  max-width:450px;
+  flex: 0 0 auto;
+  max-width:420px;
+  width: 92%;
   display:flex;
   flex-direction:column;
-  gap:0.8rem;
-  padding:1rem;
-  border-radius:15px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
-  transition: transform 0.45s cubic-bezier(.2,.9,.2,1), box-shadow 0.45s ease;
-  box-shadow: 0 10px 30px rgba(3,8,20,0.45);
+  gap:0.6rem;
+  padding:0.8rem;
+  border-radius:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04));
+  transition: transform 0.35s cubic-bezier(.2,.9,.2,1), box-shadow 0.35s ease;
+  box-shadow: 0 8px 26px rgba(3,8,20,0.35);
   cursor: default;
+  margin: 0 auto;
+  overflow: visible; /* ensure no internal scroll */
 }
 .disc-item:hover {
   transform: translateY(-10px) scale(1.015);
@@ -406,11 +477,12 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
 }
 .disc-item img { 
   width:100%; 
-  aspect-ratio:1/1; 
+  height: auto;
+  max-height: 300px;
   object-fit:cover; 
-  border-radius:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.45); 
-  transition: transform 0.6s cubic-bezier(.2,.9,.2,1);
+  border-radius:10px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.35); 
+  transition: transform 0.45s cubic-bezier(.2,.9,.2,1);
 }
 .disc-item:hover img { transform: scale(1.04) rotate(-0.6deg); }
 
@@ -452,21 +524,30 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   align-self: center;
 }
 
-/* Responsive */
-/* タブレット (1024px以下) */
-@media(max-width:1024px){
-  .disc-container {
-    flex-wrap: wrap; 
-    justify-content: center;
-  }
-  .disc-item {
-    flex: 0 0 45%;
-    max-width: 350px;
-  }
+/* Center discography content vertically inside its section */
+.discography-content {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
 }
 
-/* スマホ (768px以下) */
-@media(max-width:768px){
+/* Make twitter content vertically centered too */
+.twitter-content {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Responsive */
+/* Two-pattern responsive: mobile (<768px) and desktop/tablet (>=768px) */
+@media(max-width:767px){
+  /* keep scroll snap off on small screens */
+  body { scroll-snap-type: none; }
   
   /* メインビジュアルの背景画像をスマホ用に切り替える */
   .main-visual {
@@ -510,34 +591,37 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
 
   /* Discography - スマホ対応 (影の調整とレイアウト) */
   .discography-content {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly; 
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 
   .disc-container {
-    flex-direction: column; 
-    align-items: center; 
-    gap: 2.5rem; 
-    
-    overflow-y: hidden;
-    flex-grow: 0; 
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+
+    overflow-y: auto;
+    flex-grow: 1;
     width: 100%;
     padding-top: 1rem;
-    padding-bottom: 1rem; 
+    padding-bottom: 1rem;
   }
   
   .disc-item {
-    flex: 0 0 auto; 
-    max-width: 70%; 
-    width: 100%; 
-    padding: 0;     
-    align-items: center; 
+    flex: 0 0 auto;
+    max-width: 340px;
+    width: 88%;
+    padding: 0.6rem;
+    align-items: center;
     text-align: center;
-    
+
     /* 画像とボタンの距離を縮小 */
-    gap: 0.5rem; 
+    gap: 0.5rem;
   }
 
   .disc-item img {
@@ -601,5 +685,50 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   /* チェックが入ったらメニューを表示 */
   .nav-toggle:checked ~ nav {
       transform: translateX(0);
+  }
+
+  /* --- 追加: モバイルでのセクションとカードのズレを修正 --- */
+  /* セクションを固定100vhにせずコンテンツに合わせる（ヘッダー分の最小高さは確保） */
+  .section {
+    /* keep sections full-height on small screens as well, but allow internal scrolling */
+    height: 100vh;
+    min-height: 0;
+    padding: 1rem 1rem;
+  }
+
+  /* コンテンツを中央揃えにしてカード等が左右にずれないようにする */
+  .content-wrapper {
+    min-height: auto;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+  }
+
+  /* Discography のカードの横幅と余白を調整して中央に揃える */
+  .disc-container {
+    width: 100%;
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+    gap: 1.5rem;
+  }
+
+  .disc-item {
+    max-width:50%;
+    width: 50%;
+    padding: 0.6rem;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  /* ボタンを確実に中央に表示 */
+  .disc-item .btn-link {
+    display: inline-block;
+    margin: 0.6rem auto 0 auto;
   }
 }
