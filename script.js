@@ -40,37 +40,31 @@ window.addEventListener('load', () => {
   }
 });
 
-/* 埋め込み iframe のフォールバック処理 (TimeTree など) */
-(() => {
-  const iframe = document.getElementById('live-iframe');
-  const fallback = document.getElementById('embed-fallback');
-  const embedWrap = document.getElementById('live-embed');
-  if (!iframe || !fallback || !embedWrap) return;
+// Header shrink on scroll
+(function(){
+  const body = document.body;
+  const header = document.querySelector('.site-header');
+  if (!header) return;
 
-  // タイムアウト: 3.5秒でフォールバックに切り替える
-  const TIMEOUT_MS = 3500;
-  let handled = false;
+  let lastScroll = 0;
+  const THRESHOLD = 48; // px
+  let ticking = false;
 
-  const showFallback = () => {
-    if (handled) return; handled = true;
-    iframe.style.display = 'none';
-    fallback.style.display = 'block';
-    fallback.setAttribute('aria-hidden', 'false');
-  };
+  function onScroll(){
+    lastScroll = window.scrollY || window.pageYOffset;
+    if (!ticking){
+      window.requestAnimationFrame(() => {
+        if (lastScroll > THRESHOLD) body.classList.add('header--small');
+        else body.classList.remove('header--small');
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
 
-  // load イベントで成功とみなす
-  iframe.addEventListener('load', () => {
-    // 一部のサイトは load が発火しても空白になる場合がある。
-    // ここでは短い遅延で外観が入るか確認し、入らない場合はフォールバックへ。
-    setTimeout(() => {
-      if (iframe.clientHeight === 0 || iframe.offsetHeight === 0) showFallback();
-      else handled = true;
-    }, 300);
-  });
-
-  // 一部ブラウザでは error が発生しないこともあるが、あればフォールバック
-  iframe.addEventListener('error', () => showFallback());
-
-  // タイムアウトで強制フォールバック
-  setTimeout(() => { if (!handled) showFallback(); }, TIMEOUT_MS);
+  // respect reduced motion
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduced) window.addEventListener('scroll', onScroll, { passive: true });
 })();
+
+// (programmatic page-like snapping removed per user request)

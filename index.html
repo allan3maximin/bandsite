@@ -38,9 +38,9 @@
     <div class="content-wrapper about-content">
       <h2>About</h2>
       <div class="about-text">
-        <p>心に響くロックバンド</p>
-        <p>爽やかなサウンドと熱い想いを乗せて––––––</p>
-        <p>目指すは武道館！</p>
+        <p>誰かの“言葉にできなかった想い”に寄り添う音楽を届けるバンド。 </p>
+        <p>爽やかさの中に潜む切なさ、キャッチーなメロディに秘めた感情が、聴いた人の心の奥にそっと残る。</p>
+        <p>夢は武道館。その道のりを、あなたと一緒に歩いていく。</p>
       </div>
     </div>
   </section>
@@ -48,12 +48,11 @@
   <section class="section" id="section3">
     <div class="content-wrapper live-content">
       <h2>Live</h2>
-      <!-- 埋め込み: TimeTree カレンダー -->
-      <div class="live-embed" id="live-embed">
-        <iframe id="live-iframe" src="https://timetr.ee/p/risuto_neko" title="TimeTree - risuto_neko" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups" referrerpolicy="no-referrer"></iframe>
-        <div class="embed-fallback" id="embed-fallback" aria-hidden="true" style="display:none;">
-          <p>埋め込みが利用できない場合は、以下のリンクから TimeTree をご覧ください。</p>
-          <a href="https://timetr.ee/p/risuto_neko" target="_blank" rel="noopener noreferrer" class="btn-link">TimeTreeで見る</a>
+      <!-- 埋め込み: timetr.ee ウィジェット (フォールバックリンク付き) -->
+      <div class="live-embed">
+        <iframe src="https://timetr.ee/p/risuto_neko" title="timetr.ee schedule" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups" referrerpolicy="no-referrer"></iframe>
+        <div class="embed-fallback" aria-hidden="false">
+          <p>埋め込みがブロックされている場合は、次のリンクから開いてください： <a href="https://timetr.ee/p/risuto_neko" target="_blank" rel="noopener">Timetr.ee: risuto_neko</a></p>
         </div>
       </div>
   </div>
@@ -65,11 +64,11 @@
       <div class="disc-container">
         <div class="disc-item">
           <img src="assets/disc1.jpg" alt="Disc 1">
-          <a href="https://music.apple.com/jp/album/moment-ep/1808129606" class="btn-link">Play Now</a>
+          <a href="https://music.apple.com/jp/album/moment-ep/1808129606" class="btn-link">Apple Musicで聴く</a>
         </div>
         <div class="disc-item">
           <img src="assets/disc2.jpg" alt="Disc 2">
-          <a href="https://music.apple.com/jp/album/%E7%AD%94%E3%81%88%E5%90%88%E3%82%8F%E3%81%9B/1809697441?i=1809697442" class="btn-link">Play Now</a>
+          <a href="https://music.apple.com/jp/album/%E7%AD%94%E3%81%88%E5%90%88%E3%82%8F%E3%81%9B/1809697441?i=1809697442" class="btn-link">Apple Musicで聴く</a>
         </div>
       </div>
     </div>
@@ -78,8 +77,48 @@
   <section class="section" id="section5">
     <div class="content-wrapper twitter-content">
       <h2>Twitter / X</h2>
-      <a class="twitter-timeline" data-height="400" href="https://twitter.com/risuto_neko?ref_src=twsrc%5Etfw">Tweets by risuto_neko</a> 
-      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <!-- メンバーカード -->
+      <div class="tw-cards">
+        <a class="tw-card" href="https://twitter.com/risuto_neko" target="_blank" rel="noopener">
+          <img class="tw-avatar" src="assets/x/official.png" alt="official">
+          <div class="tw-meta">
+            <div class="tw-name">公式 (Band)</div>
+            <div class="tw-id">@risuto_neko</div>
+          </div>
+        </a>
+
+        <a class="tw-card" href="https://twitter.com/maru_risuto" target="_blank" rel="noopener">
+          <img class="tw-avatar" src="assets/x/maru.png" alt="maru">
+          <div class="tw-meta">
+            <div class="tw-name">まる (Vo)</div>
+            <div class="tw-id">@maru_risuto</div>
+          </div>
+        </a>
+
+        <a class="tw-card" href="https://twitter.com/akari_risuto" target="_blank" rel="noopener">
+          <img class="tw-avatar" src="assets/x/akari.png" alt="akari">
+          <div class="tw-meta">
+            <div class="tw-name">あかり (Gt)</div>
+            <div class="tw-id">@akari_risuto</div>
+          </div>
+        </a>
+
+        <a class="tw-card" href="https://twitter.com/aoba_risuto" target="_blank" rel="noopener">
+          <img class="tw-avatar" src="assets/x/aoba.png" alt="aoba">
+          <div class="tw-meta">
+            <div class="tw-name">あおば (Ba)</div>
+            <div class="tw-id">@aoba_risuto</div>
+          </div>
+        </a>
+
+        <a class="tw-card" href="https://twitter.com/yuip_risuto" target="_blank" rel="noopener">
+          <img class="tw-avatar" src="assets/x/yuipi.png" alt="yuipi">
+          <div class="tw-meta">
+            <div class="tw-name">ゆいぴ (Dr)</div>
+            <div class="tw-id">@yuip_risuto</div>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
 
