@@ -24,7 +24,6 @@
   </header>
 
   <section class="main-visual">
-    <img src="assets/logo.png" alt="Main Logo" class="logo-main">
   </section>
     
   <section class="section dark-section" id="section1">
@@ -49,6 +48,14 @@
   <section class="section" id="section3">
     <div class="content-wrapper live-content">
       <h2>Live</h2>
+      <!-- 埋め込み: TimeTree カレンダー -->
+      <div class="live-embed" id="live-embed">
+        <iframe id="live-iframe" src="https://timetr.ee/p/risuto_neko" title="TimeTree - risuto_neko" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups" referrerpolicy="no-referrer"></iframe>
+        <div class="embed-fallback" id="embed-fallback" aria-hidden="true" style="display:none;">
+          <p>埋め込みが利用できない場合は、以下のリンクから TimeTree をご覧ください。</p>
+          <a href="https://timetr.ee/p/risuto_neko" target="_blank" rel="noopener noreferrer" class="btn-link">TimeTreeで見る</a>
+        </div>
+      </div>
       <div class="live-wrapper">
         <ul>
           <li><span class="live-date">2026/03/15</span><span class="live-venue">東京ドーム</span></li>
