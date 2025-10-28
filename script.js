@@ -1,39 +1,16 @@
-// Set CSS variable --vh to 1% of the viewport height in pixels.
-// This helps avoid mobile browser / webview issues where 100vh is calculated
-// including browser chrome, causing layout jumps (notably iOS Safari and app webviews).
-(function () {
-  const setVh = () => {
-    let h = window.innerHeight;
-    if (window.visualViewport && window.visualViewport.height) {
-      h = window.visualViewport.height;
-    }
-    // --vh is 1% of the viewport height in px
-    document.documentElement.style.setProperty('--vh', `${h * 0.01}px`);
-  };
 
-  // Initialize
-  setVh();
-
-  // Update on resize/orientation change and visualViewport resize
-  let rafId = null;
-  const schedule = () => {
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(() => {
-      setVh();
-      rafId = null;
-    });
-  };
-
-  window.addEventListener('resize', schedule, { passive: true });
-  window.addEventListener('orientationchange', schedule, { passive: true });
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', schedule, { passive: true });
+// Fix mobile viewport unit issues (iOS Safari / app webviews) by setting --vh
+// This provides a reliable fallback to use in CSS when dvh isn't supported.
+(function setVhVariable(){
+  function setVh(){
+    try{
+      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    }catch(e){/* ignore */}
   }
-
-  // Also reset after DOMContentLoaded in case fonts/images change layout
-  window.addEventListener('DOMContentLoaded', () => setTimeout(setVh, 50));
+  setVh();
+  window.addEventListener('resize', setVh, { passive: true });
+  window.addEventListener('orientationchange', setVh);
 })();
-
 
 document.addEventListener('DOMContentLoaded', () => {
   // ハンバーガーメニューのチェックボックス要素を取得

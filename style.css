@@ -159,7 +159,9 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
 /* Main Visual */
 .main-visual {
   position: relative;
-  height: 100vh;
+  /* Use dynamic viewport unit (dvh) where supported, fallback to JS-driven --vh */
+  height: 100dvh;
+  height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   background: url("assets/main_visual.jpg") center 20%/cover no-repeat;
   background-attachment: fixed;
@@ -198,9 +200,11 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
 
 /* Section 共通スタイル */
 .section {
-  /* desktop default: use full viewport height so each section feels like a page
-     use --vh custom property (set by JS) to avoid mobile/app-webview vh issues */
+  /* desktop default: use full viewport height so each section feels like a page */
+  /* Prefer dvh to avoid mobile UI chrome issues; fallback to --vh */
+  height: 100dvh;
   height: calc(var(--vh, 1vh) * 100);
+  min-height: 100dvh;
   min-height: calc(var(--vh, 1vh) * 100);
   scroll-snap-align: start;
   scroll-snap-stop: always;
@@ -227,8 +231,10 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   transform: none;
   transition: none;
   /* default: let content size naturally; for desktop we'll cap height with a media query */
-  /* Fix content wrapper height to 90vh as requested (use --vh so mobile webviews calculate correctly) */
+  /* Fix content wrapper height to 90dvh / calc(var(--vh) * 90) to avoid mobile viewport issues */
+  height: 90dvh;
   height: calc(var(--vh, 1vh) * 90);
+  max-height: 90dvh;
   max-height: calc(var(--vh, 1vh) * 90);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -256,11 +262,13 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
 /* Desktop: keep sections 100vh but make inner wrapper scrollable so tall content fits */
 @media (min-width: 768px) {
   .content-wrapper {
-    /* keep fixed 90vh on desktop as well (via --vh) */
-    max-height: calc(var(--vh, 1vh) * 90);
+  /* keep fixed 90dvh on desktop as well (with fallback) */
+  max-height: 90dvh;
+  max-height: calc(var(--vh, 1vh) * 90);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     padding-right: 1rem; /* space for scrollbar */
+    height: 90dvh;
     height: calc(var(--vh, 1vh) * 90);
   }
   /* ensure disc items don't exceed wrapper width */
@@ -279,7 +287,7 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   }
   /* Ensure discography area centers its cards vertically within the section on desktop */
   .discography-content {
-    min-height: calc(var(--vh, 1vh) * 100 - 140px);
+    min-height: calc(100vh - 140px);
     display:flex;
     flex-direction: column;
     justify-content: center;
@@ -723,8 +731,10 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   /* セクションを固定100vhにせずコンテンツに合わせる（ヘッダー分の最小高さは確保） */
   .section {
     /* keep sections full-height on small screens as well, but allow internal scrolling */
-    height: 100vh;
-    min-height: 100vh;
+    height: 100dvh;
+    height: calc(var(--vh, 1vh) * 100);
+    min-height: 100dvh;
+    min-height: calc(var(--vh, 1vh) * 100);
     padding: 1rem 1rem;
   }
 
@@ -737,8 +747,10 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
     align-items: center;
     text-align: center;
     padding: 1rem;
-    max-height: 90vh;
-    height: 90vh;
+    max-height: 90dvh;
+    max-height: calc(var(--vh, 1vh) * 90);
+    height: 90dvh;
+    height: calc(var(--vh, 1vh) * 90);
     overflow-y: auto;
   }
 
