@@ -59,11 +59,6 @@ body.is-ready::after{
   display: none;
 }
 
-/* アニメーションを無効化したいユーザー向け */
-@media (prefers-reduced-motion: reduce){
-  body::after, body.is-loaded::after { transition: none; opacity: 0; display: none; }
-}
-
 /* Header */
 .site-header {
   position: fixed;
@@ -159,9 +154,7 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
 /* Main Visual */
 .main-visual {
   position: relative;
-  /* Use dynamic viewport unit (dvh) where supported, fallback to JS-driven --vh */
-  height: 100dvh;
-  height: 100dvh;
+  height: 100vh;
   width: 100%;
   background: url("assets/main_visual.jpg") center 20%/cover no-repeat;
   background-attachment: fixed;
@@ -201,18 +194,13 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
 /* Section 共通スタイル */
 .section {
   /* desktop default: use full viewport height so each section feels like a page */
-  /* Prefer dvh to avoid mobile UI chrome issues; fallback to --vh */
-  height: 100dvh;
-  height: 100dvh;
-  min-height: 100dvh;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  height: 100vh;
+  min-height: 100vh;
   display:flex;
   align-items:center; /* center main content vertically by default */
   justify-content:center;
   padding:2rem;
   position:relative;
-  overflow: hidden; /* content-wrapper will handle internal scrolling if needed */
 }
 
 /* 背景色が黒のセクション (section1, section2用) */
@@ -226,17 +214,6 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   padding:2rem;
   max-width:1100px;
   width:100%;
-  text-align:left;
-  transform: none;
-  transition: none;
-  /* default: let content size naturally; for desktop we'll cap height with a media query */
-  /* Fix content wrapper height to 90dvh / calc(var(--vh) * 90) to avoid mobile viewport issues */
-  height: 90dvh;
-  height: 90dvh;
-  max-height: 90dvh;
-  max-height: 90dvh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
   min-height: auto;
   display: flex;
   flex-direction: column;
@@ -248,26 +225,8 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   backdrop-filter: none;
 }
 
-/* Inner wrapper used to vertically center content inside .content-wrapper */
-.content-inner {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* vertical centering */
-  align-items: inherit; /* preserve horizontal alignment from parent (.content-wrapper) */
-}
-
 /* Desktop: keep sections 100vh but make inner wrapper scrollable so tall content fits */
 @media (min-width: 768px) {
-  .content-wrapper {
-  /* keep fixed 90dvh on desktop */
-  max-height: 90dvh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-right: 1rem; /* space for scrollbar */
-    height: 90dvh;
-  }
   /* ensure disc items don't exceed wrapper width */
   .disc-item { max-width: 720px; width: 100%; }
   /* Desktop: discography 2-column */
@@ -728,10 +687,8 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   /* セクションを固定100vhにせずコンテンツに合わせる（ヘッダー分の最小高さは確保） */
   .section {
     /* keep sections full-height on small screens as well, but allow internal scrolling */
-    height: 100dvh;
-    height: calc(var(--vh, 1vh) * 100);
-    min-height: 100dvh;
-    min-height: calc(var(--vh, 1vh) * 100);
+    height: 100vh;
+    min-height: 100vh;
     padding: 1rem 1rem;
   }
 
@@ -744,10 +701,7 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
     align-items: center;
     text-align: center;
     padding: 1rem;
-    max-height: 90dvh;
-    max-height: calc(var(--vh, 1vh) * 90);
-    height: 90dvh;
-    height: calc(var(--vh, 1vh) * 90);
+    max-height: calc(100vh - 140px);
     overflow-y: auto;
   }
 

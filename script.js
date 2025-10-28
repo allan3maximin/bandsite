@@ -1,6 +1,4 @@
 
-// NOTE: --vh JS polyfill removed — CSS now relies on dvh only as requested.
-
 document.addEventListener('DOMContentLoaded', () => {
   // ハンバーガーメニューのチェックボックス要素を取得
   const navToggle = document.getElementById('nav-toggle');
