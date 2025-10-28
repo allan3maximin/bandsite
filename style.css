@@ -678,7 +678,7 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   /* セクションを固定100vhにせずコンテンツに合わせる（ヘッダー分の最小高さは確保） */
   .section {
     /* keep sections full-height on small screens as well, but allow internal scrolling */
-    height: 100vh;
+    min-height: 100vh;
     padding: 1rem 1rem;
   }
 
