@@ -1,16 +1,5 @@
 
-// Fix mobile viewport unit issues (iOS Safari / app webviews) by setting --vh
-// This provides a reliable fallback to use in CSS when dvh isn't supported.
-(function setVhVariable(){
-  function setVh(){
-    try{
-      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-    }catch(e){/* ignore */}
-  }
-  setVh();
-  window.addEventListener('resize', setVh, { passive: true });
-  window.addEventListener('orientationchange', setVh);
-})();
+// NOTE: --vh JS polyfill removed — CSS now relies on dvh only as requested.
 
 document.addEventListener('DOMContentLoaded', () => {
   // ハンバーガーメニューのチェックボックス要素を取得
