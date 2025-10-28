@@ -679,6 +679,7 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   .section {
     /* keep sections full-height on small screens as well, but allow internal scrolling */
     min-height: 100vh;
+    min-height: 100lvh;
     padding: 1rem 1rem;
   }
 
