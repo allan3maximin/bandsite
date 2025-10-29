@@ -10,14 +10,10 @@
   --card-shadow: 0 12px 30px rgba(2,6,23,0.55);
 }
 html, body { height: 100%; }
-html { scroll-padding-top: 70px; }
 body {
   font-family: 'Poppins', 'Helvetica Neue', sans-serif;
   background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 45%, #f7f7f8 100%);
   color: #0f1724;
-  overflow-x: hidden;
-  scroll-snap-type: y mandatory; 
-  scroll-behavior: smooth;
   position: relative;
   min-height: 100vh;
 }
@@ -174,10 +170,6 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   justify-content:center;
   padding:2rem;
   position:relative;
-}
-.dark-section {
-  color:#eaf1f6;
-  background: linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.55));
 }
 .content-wrapper {
   padding:2rem;
@@ -401,7 +393,6 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
 
 /* --- Mobile <768px --- */
 @media (max-width:767px) {
-  body { scroll-snap-type: none; }
   .main-visual {
     background-image: url("assets/main_visual_sp.jpg");
     background-attachment: scroll; animation-duration: 42s;
