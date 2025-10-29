@@ -9,13 +9,13 @@
   --muted:#9aa4ac;
   --card-shadow: 0 12px 30px rgba(2,6,23,0.55);
 }
-html, body { height: 100%; }
 body {
   font-family: 'Poppins', 'Helvetica Neue', sans-serif;
   background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 45%, #f7f7f8 100%);
   color: #ffffff;
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* subtle texture overlay */
@@ -285,12 +285,7 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   line-height: 3.6rem;
   border-bottom: 1px solid rgba(255,255,255,0.04);
 }
-.live-wrapper ul li:last-child { border-bottom: none; }
-.live-date { text-align: right; padding-right: 10px; }
-.live-venue { text-align: left; padding-left: 10px; }
-
 /* Discography */
-.discography-content h2 { color: #fff; }
 .disc-container {
   display:flex;
   flex-direction: column;
@@ -364,7 +359,6 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
 /* Twitter Cards */
 .tw-cards {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.9rem;
   margin-top: 1.2rem;
 }
@@ -408,10 +402,6 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   .live-wrapper ul li {
     display: block; font-size: 1rem; line-height: 1.5; padding: 0.8rem 0;
   }
-  .live-date, .live-venue {
-    display: block; text-align: center; padding: 0;
-  }
-  .live-date { margin-bottom: 0.2rem; }
   .discography-content {
     display: flex; flex-direction: column; align-items: center;
     padding: 0.5rem 0;
@@ -440,11 +430,6 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
     font-size: 1.8rem; margin: 1rem 1rem 1rem 0; text-align: right; display: block;
   }
   .nav-toggle:checked ~ nav { transform: translateX(0); }
-
-  .section {
-    min-height: 100vh; min-height: 100lvh;
-    padding: 1rem;
-  }
   .disc-item .btn-link { margin: 0.6rem auto 0 auto; }
   .tw-cards { display: flex; flex-direction: column; gap: 0.9rem; }
   .tw-card {
