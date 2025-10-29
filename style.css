@@ -39,8 +39,7 @@ body::after{
   opacity: 1;
   background-color: black;
   height: 100%;
-  min-height: 100%;
-  min-height: 100lvh;
+  min-height: 300%;
 }
 
 /* フェードアウト後に完全に無効化するクラス */
