@@ -14,6 +14,7 @@ body {
   font-family: 'Poppins', 'Helvetica Neue', sans-serif;
   background: #0f1724;
   color: #0f1724;
+  min-height: 100dvh;
 }
 
 /* subtle texture overlay */
@@ -651,12 +652,11 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
 .loading-logo img {
   width: 50%; /* ロゴサイズはお好みで調整 */
   height: auto;
-  animation: logoFade 3s ease-in-out infinite alternate;
 }
 
 @keyframes logoFade {
-  from { opacity: 1; transform: scale(0.96); }
-  to { opacity: 0; transform: scale(1.02); }
+  from { opacity: 1; transform: scale(1.05); }
+  to { opacity: 0; transform: scale(1.00); }
 }
 
 /* ロード完了時に非表示 */
