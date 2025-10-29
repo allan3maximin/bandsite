@@ -10,14 +10,13 @@
   --card-shadow: 0 12px 30px rgba(2,6,23,0.55);
 }
 html, body { height: 100%; }
-/* account for fixed header when snapping/anchoring */
+
 body {
   font-family: 'Poppins', 'Helvetica Neue', sans-serif;
   background: #0f1724;
   color: #0f1724;
 }
 
-/* subtle texture overlay */
 body::before{
   content:"";
   position:fixed;
@@ -26,6 +25,7 @@ body::before{
   mix-blend-mode: overlay;
   opacity:1;
   z-index:0;
+  height: 100%;
 }
 
 /* ページ読み込み時の暗転オーバーレイ（暗点→明転）
@@ -37,6 +37,7 @@ body::after{
   z-index: 9999;
   pointer-events: auto;
   opacity: 1;
+  background-color: black;
 }
 
 /* フェードアウト後に完全に無効化するクラス */
