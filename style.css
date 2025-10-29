@@ -14,7 +14,7 @@ body {
   font-family: 'Poppins', 'Helvetica Neue', sans-serif;
   background: #0f1724;
   color: #0f1724;
-  min-height: 100dvh;
+  height: 100%;
 }
 
 /* subtle texture overlay */
