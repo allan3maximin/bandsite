@@ -9,6 +9,7 @@
   --muted:#9aa4ac;
   --card-shadow: 0 12px 30px rgba(2,6,23,0.55);
 }
+html, body { height: 100%; }
 /* account for fixed header when snapping/anchoring */
 body {
   font-family: 'Poppins', 'Helvetica Neue', sans-serif;
@@ -36,8 +37,6 @@ body::after{
   z-index: 9999;
   pointer-events: auto;
   opacity: 1;
-  height: 100%;
-  height: 100dvh;
 }
 
 /* フェードアウト後に完全に無効化するクラス */
