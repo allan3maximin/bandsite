@@ -14,30 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-/* ページ読み込み時の暗転フェードを制御 */
-// window.load を待って body に .is-loaded を付与し、トランジション完了後に .is-ready を付けて overlay を無効化
-window.addEventListener('load', () => {
-  try {
-    const body = document.body;
-    // すぐにフェードを許可
-    requestAnimationFrame(() => body.classList.add('is-loaded'));
-
-    // トランジション完了後に完全に無効化（900ms と CSS に合わせる）
-    const TRANSITION_MS = 900;
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
-      body.classList.add('is-ready');
-      return;
-    }
-
-    // 安全のためタイムアウトでクラスを追加
+window.addEventListener("load", () => {
+  // ロード完了後、まずは2.5秒ロゴを表示
+  setTimeout(() => {
+    document.body.classList.add("is-loaded");
+    // さらに0.9秒後に完全にready（黒幕・ロゴを消す）
     setTimeout(() => {
-      body.classList.add('is-ready');
-    }, TRANSITION_MS + 60);
-  } catch (e) {
-    // 失敗しても致命的ではない
-    console.warn('load overlay handling failed', e);
-  }
+      document.body.classList.add("is-ready");
+    }, 900);
+  }, 2500);
 });
 
 // Header shrink on scroll
