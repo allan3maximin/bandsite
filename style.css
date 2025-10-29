@@ -13,7 +13,7 @@ html, body { height: 100%; }
 body {
   font-family: 'Poppins', 'Helvetica Neue', sans-serif;
   background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 45%, #f7f7f8 100%);
-  color: #0f1724;
+  color: #ffffff;
   position: relative;
   min-height: 100vh;
 }
@@ -164,7 +164,7 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
 
 /* Section 共通 */
 .section {
-  height: 100vh;
+  min-height: 100vh;
   display:flex;
   align-items:center;
   justify-content:center;
