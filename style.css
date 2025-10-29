@@ -9,18 +9,11 @@
   --muted:#9aa4ac;
   --card-shadow: 0 12px 30px rgba(2,6,23,0.55);
 }
-html, body { height: 100%; }
 /* account for fixed header when snapping/anchoring */
-html { scroll-padding-top: 70px; }
 body {
   font-family: 'Poppins', 'Helvetica Neue', sans-serif;
-  background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 45%, #f7f7f8 100%);
+  background: #0f1724;
   color: #0f1724;
-  overflow-x: hidden;
-  scroll-snap-type: y mandatory; 
-  scroll-behavior: smooth;
-  position: relative;
-  min-height: 100vh;
 }
 
 /* subtle texture overlay */
@@ -29,11 +22,8 @@ body::before{
   position:fixed;
   inset:0;
   pointer-events:none;
-  background:
-    radial-gradient(circle at 10% 10%, rgba(255,255,255,0.02), transparent 10%),
-    radial-gradient(circle at 90% 90%, rgba(0,0,0,0.04), transparent 10%);
   mix-blend-mode: overlay;
-  opacity:0.9;
+  opacity:1;
   z-index:0;
 }
 
@@ -57,11 +47,6 @@ body.is-loaded::after{
 }
 body.is-ready::after{
   display: none;
-}
-
-/* アニメーションを無効化したいユーザー向け */
-@media (prefers-reduced-motion: reduce){
-  body::after, body.is-loaded::after { transition: none; opacity: 0; display: none; }
 }
 
 /* Header */
@@ -174,22 +159,6 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   z-index:1;
   pointer-events: none;
 }
-
-@keyframes bgFloat {
-  0% { background-position: center 18%; }
-  50% { background-position: center 22%; }
-  100% { background-position: center 18%; }
-}
-.main-visual { animation: bgFloat 28s ease-in-out infinite; }
-/* Two patterns: desktop/tablet (>=768px) and mobile (<768px) */
-@media (max-width: 767px) {
-  /* keep scroll snap off on small screens */
-  body { scroll-snap-type: none; }
-  .live-embed iframe { height: 320px; }
-  /* Move avatar rule into mobile block */
-  .tw-avatar { width: 56px; height: 56px; }
-}
-
 @keyframes logoPop {
   0% { transform: translateY(18%) scale(1.06); opacity:0; }
   60% { transform: translateY(-4%) scale(0.98); opacity:1; }
@@ -201,20 +170,11 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   /* desktop default: use full viewport height so each section feels like a page */
   height: 100vh;
   min-height: 100vh;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   display:flex;
   align-items:center; /* center main content vertically by default */
   justify-content:center;
   padding:2rem;
   position:relative;
-  overflow: hidden; /* content-wrapper will handle internal scrolling if needed */
-}
-
-/* 背景色が黒のセクション (section1, section2用) */
-.dark-section {
-  color:#eaf1f6;
-  background: linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.55));
 }
 
 /* コンテンツラッパーの共通スタイル */
@@ -222,17 +182,13 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   padding:2rem;
   max-width:1100px;
   width:100%;
-  text-align:left;
-  transform: none;
-  transition: none;
-  /* default: let content size naturally; for desktop we'll cap height with a media query */
-  min-height: auto;
+  text-align: center;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  color: inherit;
-  background: none;
+  justify-content: center;
+  align-items: center;
+  background: rgb(255, 248, 227);
   border-radius: 0;
   box-shadow: none;
   border: none;
@@ -241,12 +197,6 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
 
 /* Desktop: keep sections 100vh but make inner wrapper scrollable so tall content fits */
 @media (min-width: 768px) {
-  .content-wrapper {
-    max-height: calc(100vh - 140px); /* account for header + spacing */
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-right: 1rem; /* space for scrollbar */
-  }
   /* ensure disc items don't exceed wrapper width */
   .disc-item { max-width: 720px; width: 100%; }
   /* Desktop: discography 2-column */
@@ -260,14 +210,6 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
     flex: 0 0 45%;
     max-width: 480px;
     width: 45%;
-  }
-  /* Ensure discography area centers its cards vertically within the section on desktop */
-  .discography-content {
-    min-height: calc(100vh - 140px);
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
 
   /* Member card (tw-card) — reduce overall height to ~2/3 for desktop
@@ -411,20 +353,6 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   }
 }
 
-
-/* Live Info */
-.live-content h2 {
-  margin-bottom: 1.5rem;
-  font-size: 2rem;
-  text-align: center;
-  color: #fff;
-}
-
-/* Twitter/X heading color */
-.twitter-content h2 {
-  color: #fff;
-}
-
 .live-wrapper ul {
   list-style: none;
   padding: 0;
@@ -454,12 +382,6 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   text-align: left;
   padding-left: 10px; 
 }
-
-/* Discography */
-.discography-content h2 {
-  color: #fff; 
-}
-
 .disc-container {
   display:flex;
   flex-direction: column; /* vertical stacking */
@@ -571,15 +493,6 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
       background-attachment: scroll; animation-duration: 42s;
   }
   
-  /* content-wrapperのスマホ調整 */
-  .content-wrapper {
-      padding: 1rem;
-      width: 100%;
-      backdrop-filter: none; box-shadow: 0 8px 26px rgba(0,0,0,0.35);
-  }
-
-  .content-wrapper h2 {font-size:1.6rem;}
-  
   /* Music Video - スマホ対応 (画面幅いっぱいに拡大) */
   .video-content {
       max-width: 100%;
@@ -588,22 +501,6 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
       margin-right: 0;
   }
   
-  /* Live Grid - スマホ対応 */
-  .live-wrapper ul li {
-    display: block; 
-    font-size: 1rem;
-    line-height: 1.5;
-    padding: 0.8rem 0;
-  }
-  .live-date, .live-venue {
-    display: block; 
-    text-align: center;
-    padding: 0;
-  }
-  .live-date {
-    margin-bottom: 0.2rem;
-  }
-
   /* Discography - スマホ対応 (影の調整とレイアウト) */
   .discography-content {
     height: 100%;
@@ -701,29 +598,6 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   .nav-toggle:checked ~ nav {
       transform: translateX(0);
   }
-
-  /* --- 追加: モバイルでのセクションとカードのズレを修正 --- */
-  /* セクションを固定100vhにせずコンテンツに合わせる（ヘッダー分の最小高さは確保） */
-  .section {
-    /* keep sections full-height on small screens as well, but allow internal scrolling */
-    height: 100vh;
-    min-height: 100vh;
-    padding: 1rem 1rem;
-  }
-
-  /* コンテンツを中央揃えにしてカード等が左右にずれないようにする */
-  .content-wrapper {
-    min-height: auto;
-    display:flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: center;
-    padding: 1rem;
-    max-height: calc(100vh - 140px);
-    overflow-y: auto;
-  }
-
   /* Discography のカードの横幅と余白を調整して中央に揃える */
   .disc-container {
     width: 100%;
@@ -733,8 +607,6 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
   }
 
   .disc-item {
-    max-width:50%;
-    width: 50%;
     padding: 0.5rem;
     align-items: center;
     text-align: center;
@@ -749,12 +621,12 @@ body.header--small .site-header .logo { height:36px; transform: translateY(0); }
 
   /* Mobile: shrink member cards to reduce height (user request) */
   .tw-card {
-    padding: 1rem 2rem;
+    padding: .8rem 1.8rem;
     gap: 0.9rem;
   }
   .tw-avatar {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     flex: 0 0 50px;
     border-radius: 5px;
     box-shadow: 0 6px 16px rgba(0,0,0,0.28);
